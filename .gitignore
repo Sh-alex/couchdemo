@@ -1,5 +1,7 @@
 .idea
 
+couchdemo.iml
+
 build/
 /gradlew
 /gradle/
