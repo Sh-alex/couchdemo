@@ -12,14 +12,25 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserRepository userRepository;
+    UserRepository repository;
 
     public List<User> getAll() {
-        Iterable<User> all = userRepository.findAll();
+        Iterable<User> all = repository.findAll();
         List<User> result = new ArrayList<>();
         all.forEach(result::add);
 
         return result;
+    }
 
+    public User create(User user) {
+        return repository.save(user);
+    }
+
+    public User update(User user) {
+        return repository.save(user);
+    }
+
+    public void delete(User user) {
+        repository.delete(user);
     }
 }
