@@ -1,6 +1,7 @@
 package com.oshevchenko.couchdemo.entity;
 
 import com.couchbase.client.java.repository.annotation.Field;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
@@ -9,6 +10,7 @@ import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 import org.springframework.lang.Nullable;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @Document
@@ -37,6 +39,21 @@ public class User {
     @Field
     @Nullable
     private String sex;
+
+    @Field
+    @Nullable
+    @JsonFormat(pattern="dd-MM-yyyy")
+    private Date studyYear;
+
+    @Field
+    @Nullable
+    @JsonFormat(pattern="dd-MM-yyyy")
+    private Date employYear;
+
+    @Field
+    @Nullable
+    @JsonFormat(pattern="dd-MM-yyyy")
+    private Date birthDate;
 
     @Field
     private Speciality speciality;
@@ -119,5 +136,29 @@ public class User {
 
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    public Date getStudyYear() {
+        return studyYear;
+    }
+
+    public void setStudyYear(Date studyYear) {
+        this.studyYear = studyYear;
+    }
+
+    public Date getEmployYear() {
+        return employYear;
+    }
+
+    public void setEmployYear(Date employYear) {
+        this.employYear = employYear;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 }
