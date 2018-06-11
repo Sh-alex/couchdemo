@@ -3,10 +3,7 @@ package com.oshevchenko.couchdemo.web;
 import com.oshevchenko.couchdemo.entity.User;
 import com.oshevchenko.couchdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,8 +29,14 @@ public class UserController {
         return service.update(user);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void delete(@RequestBody User user) {
-        service.delete(user);
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    public void delete(@PathVariable String id) {
+        List<User> users = service.getAll();
+        User userToDelete = users.stream()
+                .filter(user -> user.getId().equalsIgnoreCase(id))
+                .findFirst()
+                .get();
+
+        service.delete(userToDelete);
     }
 }
